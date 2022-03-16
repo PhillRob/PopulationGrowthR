@@ -162,8 +162,14 @@ lagfit = function(data, yeardata, species = NULL, knots=NULL, zeros=TRUE, plotla
     out = list(fitdata=fitdata, fitcoefs = fitlist)
   }
   else{
-    out = list(Species = outspecies, Scene = outscene, Lag =outlag, Laglength = outlaglength, FirstYear=outfirstyear, EndYear=outendyear)
-    out$fit = fit0
+    if(length(sdata$Year) >= 2) {
+      out = list(Species = outspecies, Scene = outscene, Lag =outlag, Laglength = outlaglength, FirstYear=outfirstyear, EndYear=outendyear)
+      out$fit = fit0
+    }
+    else {
+      print('There is insufficient data')
+      return()
+    }
   }
   out
 }
