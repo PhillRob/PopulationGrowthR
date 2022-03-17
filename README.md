@@ -49,7 +49,7 @@ plot <- plot ()
 
 ## GBIF wrangler
 
-You can use `raw2freqdata.R` to wrap [GBIF](https://www.gbif.org/) data downloaded using the [rgbif package](https://CRAN.R-project.org/package=rgbif) by \@Scott_Chamberlain_Vijay_Barve_Dan_Mcglinn_Damiano_Oldoni_Laurens_Geffert_Karthik_Ram2018-zi into the format required by the lag code.
+You can use `raw2freqdata.R` to wrap [GBIF](https://www.gbif.org/) data downloaded using the [rgbif package](https://CRAN.R-project.org/package=rgbif) by @Scott_Chamberlain_Vijay_Barve_Dan_Mcglinn_Damiano_Oldoni_Laurens_Geffert_Karthik_Ram2018-zi into the format required by the lag code.
 
 ``` r
 # get gbif occurences
@@ -74,7 +74,7 @@ lagdata <- raw2freqdata(x = gbifocc)
 
 ### Model fit
 
-This function also allows to specify the number of knots (0-4) and returns the scenario of the fit between the knots. A sequence of 0, + or - is returned. A 0 indicates constant, + indicates a positive slope and a - indicates negative slope. The function fits generalised linear models \@Hyndman2015-rt to the Poisson distributed count data and adjusts the collection rate by the overall collection effort. $$n_t \sim Poisson(N_t  exp[f(t)])$$ $N_t$ = total number of samples of alien species/year
+This function also allows to specify the number of knots (0-4) and returns the scenario of the fit between the knots. A sequence of 0, + or - is returned. A 0 indicates constant, + indicates a positive slope and a - indicates negative slope. The function fits generalised linear models @Hyndman2015-rt to the Poisson distributed count data and adjusts the collection rate by the overall collection effort. $$n_t \sim Poisson(N_t  exp[f(t)])$$ $N_t$ = total number of samples of alien species/year
 
 $n_t$ = number of samples of focal species/year
 
