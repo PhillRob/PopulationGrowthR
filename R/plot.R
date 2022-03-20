@@ -1,16 +1,19 @@
 #' Produces plot of the fitted spline function after adjusting for number of Specimens
 #'
 #' @param fit a "lagphase" fit object to plot
+#' @param ylim vector of size 2 - limits of the $y$-axis
+#' @param xlab Label for the $x$-axis
+#' @param ylab Label for the $y$-axis
+#' @param main Title of the plot
 #' @param ... (optional) parameters to pass to plot
 #'
 #' @return Produces a plot of the fit with confidence bands
 #' @examples
 #' Species = unique(fdata$Species) #List of all species
 #' fit1 = lagfit(fdata, yeardata, species=Species[1])
-#' plot.lagphase(fit1$fit)
+#' growthplot(fit1$fit)
 #' @export
-
-plot.lagphase <- function(fit,ylim=NULL,xlab="Year", ylab="Adjusted Frequency", main=fit$name,...)
+growthplot <- function(fit, ylim=NULL, xlab="Year", ylab="Adjusted Frequency", main = fit$name, ...)
 {
   fits <- predict(fit, se.fit=TRUE)
 
@@ -25,7 +28,7 @@ plot.lagphase <- function(fit,ylim=NULL,xlab="Year", ylab="Adjusted Frequency", 
 
   j <- (fit$data$Specimens > 0)
 
-  plot(fit$data$Year[j],adjfits, ylim=ylim,  type="n", xlab=xlab,ylab=ylab,
+  plot(fit$data$Year[j],adjfits, type="n", xlab=xlab,ylab=ylab,
        main=main,...)
   polygon(c((fit$data$Year[j]),rev(fit$data$Year[j])),c(lo,rev(up)),border=FALSE,col="gray")
   lines(fit$data$Year[j],adjfits)

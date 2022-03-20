@@ -38,11 +38,12 @@
 #'fitdata = fit2$fitdata  #Dataframe containing fits
 #'fitcoefs = fit2$fitcoefs #List containing slopes of the fitted splines
 #'
-#'#Run lagfit with plots
-#'fit1 = lagfit(fdata, yeardata, species=Species[1], plotlag = T, plotfreq = T)
-#'
+#'\dontrun{
 #'#Run lagfit for the whole dataset
 #'fitall = lagfit(fdata, yeardata)
+#'}
+#' @importFrom graphics abline lines polygon rug
+#' @importFrom stats fitted glm na.omit optim poisson predict quantile vcov
 #' @export
 lagfit = function(data, yeardata, species = NULL, knots=NULL, zeros=TRUE, plotlag=FALSE, plotfreq=FALSE){
 
@@ -148,7 +149,7 @@ lagfit = function(data, yeardata, species = NULL, knots=NULL, zeros=TRUE, plotla
       outscene = c(outscene, scene)
       outslopes = c(outslopes, slopes)
 
-      if(plotlag) plot.lagphase(fit0)
+      if(plotlag) growthplot(fit0)
       if(plotfreq) freqplot(fit0)
       sname= Species[i]
       coeflist = list(coefl)
@@ -415,42 +416,3 @@ AICc <- function(object)
 }
 
 
-# Fit piecewise linear model
-pwlm <- function(x,y)
-{
-  # choose knot
-  minmse <- Inf
-  xgrid <- seq(min(x),max(x),l=102)[-c(1,102)]
-  for(k in xgrid)
-  {
-    x2 <- pmax(x-k,0)
-    fit <- lm(y ~ x + x2)
-    res <- residuals(fit)
-    mse <- mean(res^2)
-    if(mse < minmse)
-    {
-      bestfit <- fit
-      bestfit$k <- k
-      minmse <- mse
-    }
-  }
-  return(bestfit)
-}
-
-print.lagphase <- function(x,...)
-{
-  if(x$lagphase)
-  {
-    cat(paste("Lag phase: ",x$data$Year[1],"-",round(x$data$Year[1]+x$lengthlag),
-              " (",round(x$lengthlag)," Years)\n",sep=""))
-  }
-  else
-  {
-    cat("No lag phase identified\n")
-  }
-  if(length(x$coef) > 1)
-  {
-    cat("  Knots:",x$knots,"\n")
-  }
-  stats:::print.lm(x,...)
-}

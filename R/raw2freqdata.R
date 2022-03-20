@@ -1,4 +1,4 @@
-#' Extract Frequncy and Specimen data from the raw data
+#' Extract Frequency and Specimen data from the raw data
 #'
 #' @param rawdata a dataframe containing species, year
 #' @param species name of the column containing species names

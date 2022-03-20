@@ -1,6 +1,10 @@
 #' Frequency plot for a lagphase fit
 #'
 #' @param fit1,fit2,fit3,fit4  "lagphase" fit objects to plot
+#' @param xlab Label for the $x$-axis
+#' @param ylab Label for the $y$-axis
+#' @param main Title of the plot
+#' @param cols Colors to be used to draw the lines
 #' @param ... (optional) parameters to pass to plot
 #'
 #' @return Produces a plot of observed and predicted frequencies for the species against year
