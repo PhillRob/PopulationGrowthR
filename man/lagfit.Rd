@@ -61,9 +61,8 @@ fit2 = lagfit(fdata, yeardata, species=Species[1:3])
 fitdata = fit2$fitdata  #Dataframe containing fits
 fitcoefs = fit2$fitcoefs #List containing slopes of the fitted splines
 
-#Run lagfit with plots
-fit1 = lagfit(fdata, yeardata, species=Species[1], plotlag = T, plotfreq = T)
-
+\dontrun{
 #Run lagfit for the whole dataset
 fitall = lagfit(fdata, yeardata)
+}
 }

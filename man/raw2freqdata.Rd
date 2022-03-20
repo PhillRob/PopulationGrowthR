@@ -2,7 +2,7 @@
 % Please edit documentation in R/raw2freqdata.R
 \name{raw2freqdata}
 \alias{raw2freqdata}
-\title{Extract Frequncy and Specimen data from the raw data}
+\title{Extract Frequency and Specimen data from the raw data}
 \usage{
 raw2freqdata(rawdata, species = "species", year = "year")
 }
@@ -21,7 +21,7 @@ Retirns a list of two dataframes
 }
 }
 \description{
-Extract Frequncy and Specimen data from the raw data
+Extract Frequency and Specimen data from the raw data
 }
 \examples{
 cleandata = raw2freqdata(rawdata)

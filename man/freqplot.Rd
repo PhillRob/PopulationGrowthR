@@ -19,6 +19,14 @@ freqplot(
 \arguments{
 \item{fit1, fit2, fit3, fit4}{"lagphase" fit objects to plot}
 
+\item{xlab}{Label for the $x$-axis}
+
+\item{ylab}{Label for the $y$-axis}
+
+\item{main}{Title of the plot}
+
+\item{cols}{Colors to be used to draw the lines}
+
 \item{...}{(optional) parameters to pass to plot}
 }
 \value{
