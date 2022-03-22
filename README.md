@@ -27,9 +27,15 @@ library(PopulationGrowthR)
 Raw GBIF data is included as test data is included along with formatted input data.
 
 ``` r
-load("data/rawdata.rda")
-load("data/fdata.rda")
-load("data/yeardata.rda")
+data(rawdata)
+cleandata = raw2freqdata(rawdata) #Convert the raw GBIF data
+fdata = cleandata$data #Frequency data for each specimen by year
+yeardata = cleandata$yeardata #Frequency data for all specimens by year
+```
+One can make use of the example data provided with the package as well
+```r
+data(fdata)
+data(yeardata)
 ```
 
 ## Fitting the model
@@ -37,14 +43,40 @@ load("data/yeardata.rda")
 This is a basic example that fits the model to the test data.
 
 ``` r
-lagTest <- lagfit(data = fdata, yeardata = yeardata)
+#Run lagfit for 1 species only
+Species = unique(fdata$Species) #List of all species
+fit1 = lagfit(data=fdata, yeardata=yeardata, species=Species[1])
+
+#Run lagfit for multiple species
+fit2 = lagfit(data=fdata, yeardata=yeardata, species=Species[1:3])
+fitdata = fit2$fitdata  #Dataframe containing fits
+fitcoefs = fit2$fitcoefs #List containing slopes of the fitted splines
+
+#Run lagfit for the whole dataset
+fitall = lagfit(data=fdata, yeardata=yeardata)
+
 ```
 
 ## Plotting the results
 
+To plot  observed and predicted frequencies for a species against year
 ``` r
-freqPlot <- freqplot()
-plot <- plot ()
+Species = unique(fdata$Species) #List of all species
+fit1 = lagfit(fdata, yeardata, species=Species[1])
+freqplot(fit1$fit)
+```
+
+To plot the fitted growth curve with confidence bands
+```r
+Species = unique(fdata$Species) #List of all species
+fit1 = lagfit(fdata, yeardata, species=Species[1])
+growthplot(fit1$fit)
+```
+
+Alternatively, one can use
+```r
+Species = unique(fdata$Species) #List of all species
+fit1 = lagfit(fdata, yeardata, species=Species[1], plotlag=TRUE, plotfreq=TRUE)
 ```
 
 ## GBIF wrangler
