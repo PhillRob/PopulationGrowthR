@@ -28,9 +28,9 @@ Raw GBIF data is included as test data is included along with formatted input da
 
 ``` r
 data(rawdata)
-cleandata = raw2freqdata(rawdata) #Convert the raw GBIF data
-fdata = cleandata$data #Frequency data for each specimen by year
-yeardata = cleandata$yeardata #Frequency data for all specimens by year
+cleandata = raw2freqdata(rawdata) # Convert the raw GBIF data
+fdata = cleandata$data # Frequency data for each specimen by year
+yeardata = cleandata$yeardata # Frequency data for all specimens by year
 ```
 One can make use of the example data provided with the package as well
 ```r
@@ -43,40 +43,34 @@ data(yeardata)
 This is a basic example that fits the model to the test data.
 
 ``` r
-#Run lagfit for 1 species only
-Species = unique(fdata$Species) #List of all species
-fit1 = lagfit(data=fdata, yeardata=yeardata, species=Species[1])
+# Run lagfit for 1 species only
+Species = unique(fdata$Species) # List of all species
+fit1 = lagfit(data = fdata, yeardata = yeardata, species = Species[1])
 
-#Run lagfit for multiple species
+# Run lagfit for multiple species
 fit2 = lagfit(data=fdata, yeardata=yeardata, species=Species[1:3])
-fitdata = fit2$fitdata  #Dataframe containing fits
-fitcoefs = fit2$fitcoefs #List containing slopes of the fitted splines
+fitdata = fit2$fitdata  # Dataframe containing fits
+fitcoefs = fit2$fitcoefs # List containing slopes of the fitted splines
 
-#Run lagfit for the whole dataset
-fitall = lagfit(data=fdata, yeardata=yeardata)
-
+# Run lagfit for the whole dataset
+fitall = lagfit(data = fdata, yeardata = yeardata)
 ```
 
 ## Plotting the results
 
 To plot  observed and predicted frequencies for a species against year
 ``` r
-Species = unique(fdata$Species) #List of all species
-fit1 = lagfit(fdata, yeardata, species=Species[1])
 freqplot(fit1$fit)
 ```
 
 To plot the fitted growth curve with confidence bands
 ```r
-Species = unique(fdata$Species) #List of all species
-fit1 = lagfit(fdata, yeardata, species=Species[1])
 growthplot(fit1$fit)
 ```
 
-Alternatively, one can use
+Alternatively, one can use the following to plot all species 
 ```r
-Species = unique(fdata$Species) #List of all species
-fit1 = lagfit(fdata, yeardata, species=Species[1], plotlag=TRUE, plotfreq=TRUE)
+fit1 = lagfit(fdata, yeardata, species = Species, plotlag = TRUE, plotfreq = TRUE)
 ```
 
 ## GBIF wrangler
@@ -120,7 +114,7 @@ The results return the scenario per species including the slope of every individ
 
 ### Scenarios
 
-Attached a few examples of single know scenarios.
+Attached a few examples of single knot scenarios in an plant invasion context.
 
 **1. Constant (single-phase, no lag):** No biphasic pattern is detected and the abundance remains constantly low/high. A species is managed or only survives in a nurtured human assisted context. The species (sleeper weed) may still be exploring suitable conditions at the margin of their 'niche', with potential for population expansion.
 
